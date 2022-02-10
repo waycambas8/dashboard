@@ -9,7 +9,8 @@ class CurlController extends Controller
     public function curl($req){
         $curl = curl_init();
         $url = $req['url'];
-        $token = (!empty(session("token")))?session("token"):"";
+        $token_auth = (!empty(session("token_auth")))?session("token_auth"):"";
+        $token_user = (!empty(session("token_user")))?session("token_user"):"";
         $method = (isset($req['method']))?$req['method']:"POST";
 
         curl_setopt_array($curl, array(
@@ -24,8 +25,8 @@ class CurlController extends Controller
             CURLOPT_POSTFIELDS => $req['data'],
             CURLOPT_HTTPHEADER => array(
                 'Token-Header:'.env("TOKEN_SERVER"),
-                'Authorization: Bearer '.$token,
-                'Token-User:'.$token
+                'Authorization: Bearer '.$token_auth,
+                'Token-User:'.$token_user   
             ),
         ));
         $response = curl_exec($curl);

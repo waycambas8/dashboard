@@ -37,7 +37,8 @@ class ApiController extends Controller
                     "id"=>$res['user']['id'],
                     "name"=>$res['user']['name'],
                     "email" =>$res['user']['email'],
-                    "token" => $res['token'],
+                    "token_user" => $res['token_user'],
+                    "token_auth" => $res['token_auth'],
                 ]);
             }
         }

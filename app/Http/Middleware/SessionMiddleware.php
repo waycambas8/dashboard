@@ -25,7 +25,7 @@ class SessionMiddleware
                     return $next($request);
                 }else{
                     Session::flush(); 
-                    return redirect()->route('login');
+                    return redirect()->route('/');
                 }
             }else{
                 return redirect()->route('login');

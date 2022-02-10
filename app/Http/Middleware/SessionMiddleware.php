@@ -17,7 +17,7 @@ class SessionMiddleware
     public function handle(Request $request, Closure $next)
     {
         if(!empty(session("id"))){
-            if(!empty(session("token"))){
+            if(!empty(session("token_user"))){
                 $req['url'] = "check_token";
                 $req['data'] = array("id" => session("id"));
                 $res = $this->curl->curl($req);
@@ -25,7 +25,7 @@ class SessionMiddleware
                     return $next($request);
                 }else{
                     Session::flush(); 
-                    return redirect()->route('/');
+                    return redirect()->route('login');
                 }
             }else{
                 return redirect()->route('login');

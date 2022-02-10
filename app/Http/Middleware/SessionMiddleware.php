@@ -23,15 +23,11 @@ class SessionMiddleware
                 $res = $this->curl->curl($req);
                 if($res['response'] == 200){
                     return $next($request);
-                }else{
-                    Session::flush(); 
-                    return redirect()->route('login');
                 }
-            }else{
-                return redirect()->route('login');
             }
-        }else{
-            return redirect()->route('login');
         }
+        Session::flush(); 
+        return redirect()->route('login');
+
     }
 }

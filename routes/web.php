@@ -17,6 +17,7 @@ use App\Http\Controllers\ApiController;
 
 Route::group(['middleware'=>'session'],function(){
     Route::get('/',[LinkController::class,"dashboard"]);
+    Route::get('/{menu}',[LinkController::class, "menu"]);
 });
 
 Route::post("addlogin",[ApiController::class,"login"])->name("addlogin");

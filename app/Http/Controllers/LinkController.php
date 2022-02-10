@@ -20,4 +20,11 @@ class LinkController extends Controller
         $res['url'] = "dashboard";
         return view("modul.dashboard.dashboard")->with(compact("res"));
     }
+
+    public function menu($name){
+        $res['modul'] = explode("_",$name)[0];
+        $res['url'] = $name;
+        $path = "modul.".$res['modul'].".".$name;
+        return view($path)->with(compact("res"));
+    }
 }

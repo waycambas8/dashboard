@@ -23,7 +23,7 @@ class CurlController extends Controller
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POSTFIELDS => $req['data'],
             CURLOPT_HTTPHEADER => array(
-                'Token-header:'.env("TOKEN_SERVER"),
+                'Token-Header:'.env("TOKEN_SERVER"),
                 'Authorization: Bearer '.$token
             ),
         ));

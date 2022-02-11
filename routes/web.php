@@ -24,6 +24,7 @@ Route::post("addregister",[ApiController::class,"register"])->name("addregister"
 Route::group(['middleware'=>'session'],function(){
     Route::get('/',[LinkController::class,"dashboard"]);
     Route::get('/{menu}',[LinkController::class, "menu"]);
+    Route::post("addimages",[ApiController::class,"add_images"])->name("addimages");
 });
 
 

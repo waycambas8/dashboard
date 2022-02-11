@@ -20,7 +20,7 @@ class SessionMiddleware
             if(!empty(session("token_user"))){
                 $req['url'] = "check_token";
                 $req['data'] = array("id" => session("id"));
-                $res = $this->curl->curl($req);
+                $res = $this->curl->with_guzzle($req);
                 if($res['response'] == 200){
                     return $next($request);
                 }

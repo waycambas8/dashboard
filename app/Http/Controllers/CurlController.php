@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 
 class CurlController extends Controller
 {
@@ -31,7 +33,20 @@ class CurlController extends Controller
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-
         return json_decode($response,true);
+    }
+
+    public function with_guzzle($req){
+        $url = $req['url'];
+        $token_auth = (!empty(session("token_auth")))?session("token_auth"):"";
+        $token_user = (!empty(session("token_user")))?session("token_user"):"";
+        $response = Http::withHeaders([
+            'Token-Header' => env("TOKEN_SERVER"),
+            'Token-User' => $token_user
+        ])
+        ->withToken($token_auth)
+        ->post(env("REQ_URL").$url, $req['data']);
+        return json_decode($response,true);
+
     }
 }

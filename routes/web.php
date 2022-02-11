@@ -15,15 +15,15 @@ use App\Http\Controllers\ApiController;
 */
 
 Route::get("login",[LinkController::class,"login"])->name("login");
-
+Route::get("register", function(){
+    return view("modul.login.register");
+});
+Route::post("addlogin",[ApiController::class,"login"])->name("addlogin");
+Route::post("addregister",[ApiController::class,"register"])->name("addregister");
 
 Route::group(['middleware'=>'session'],function(){
     Route::get('/',[LinkController::class,"dashboard"]);
     Route::get('/{menu}',[LinkController::class, "menu"]);
 });
 
-Route::post("addlogin",[ApiController::class,"login"])->name("addlogin");
-Route::post("addregister",[ApiController::class,"register"])->name("addregister");
-Route::get("register", function(){
-    return view("modul.login.register");
-});
+

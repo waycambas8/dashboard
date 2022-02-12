@@ -113,8 +113,6 @@ class ApiController extends Controller
         $res = $this->curl->with_guzzle($req);
 
         $records = $res['records'];
-
-        //print_r($res);exit;
         $data_arr = array();
         foreach($records as $record){
             $id = $record['id_images'];
@@ -143,8 +141,11 @@ class ApiController extends Controller
         exit; 
     }
 
-    public function get_img(Request $req){
-
+    public function logout(){
+        $req['data'] = array("sign_out");
+        $req['url'] = "logout";
+        $res = $this->curl->with_guzzle($req);
+        return $res;
     }
     
 }

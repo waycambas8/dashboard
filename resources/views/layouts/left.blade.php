@@ -21,7 +21,7 @@
           </li>
           <li class="user-footer">
             <a href="#" class="btn btn-default btn-flat">Profile</a>
-            <a href="" class="btn btn-default btn-flat float-right">Sign out</a>
+            <button class="btn btn-default btn-flat float-right logout">Sign out</button>
           </li>
         </ul>
       </li>
@@ -66,6 +66,41 @@
 
 
 <script type="text/javascript">
-      var parents = "<?=(!empty($res['modul'])&&$res['modul'])?$res['modul']:'dashboard'?>";
-      $( "."+parents ).addClass( "active" ); 
+  $('document').ready(function(){
+    $(".logout").on("click",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var btn = $(".btn");
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+          }
+        });
+        $.ajax({
+          url: "{{route('logout')}}",
+          data: {
+            type:"logout"
+          },
+          type: 'POST',
+          dataType: 'json',
+          beforeSend: function(){
+            btn.prop("disabled",true);
+            toastr.warning('Loadings...')
+          },
+          success: function(d){
+            if(d.response == 200){
+              location.reload();
+            }else{
+              toastr.error(d.pesan)
+            }     
+            btn.prop("disabled",false);
+          },
+          error: function(){}
+        });
+    });
+
+    var parents = "<?=(!empty($res['modul'])&&$res['modul'])?$res['modul']:'dashboard'?>";
+    $( "."+parents ).addClass( "active" ); 
+  });
+      
 </script>

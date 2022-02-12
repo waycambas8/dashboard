@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\CurlController;
+use Illuminate\Support\Facades\Storage;
 
 
 class ApiController extends Controller
@@ -79,7 +80,7 @@ class ApiController extends Controller
         $validator = Validator::make($req->all(), [
             'nama' => 'required|min:2|max:15',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png'
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:1024'
         ]);
         if($validator->fails()){
             $fail = $validator->messages();
@@ -118,13 +119,15 @@ class ApiController extends Controller
         foreach($records as $record){
             $id = $record['id_images'];
             $images = $record['nama_images'];
-            $upload = $record['images'];
-            $action = "tes";
+            $upload = explode("/",$record['images'])[1];
+            $gambar = "<img src='".asset('storage/'.$upload)."' width='25' height='25' />";
+            $action = "<a type='button' target='_blank' href='".asset('storage/'.$upload)."' class='btn btn-success btn-sm'><i class='fa fa-eye'></i> </a>";
 
             $data_arr[] = array(
                 "id_images" => $id,
                 "images" => $images,
                 "upload" => $upload,
+                "img" => $gambar,
                 "action" => $action
             );
         }
@@ -138,6 +141,10 @@ class ApiController extends Controller
 
         echo json_encode($response);
         exit; 
+    }
+
+    public function get_img(Request $req){
+
     }
     
 }

@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Data Image</h3>
-                        <a href="{{URL('images_add')}}" type="button" class="btn btn-success float-right">Add Template</a>
+                        <a href="{{URL('images_add')}}" type="button" class="btn btn-success float-right">Add Image</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover" id="image_table">
@@ -17,6 +17,7 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Upload</th>
+                                    <th>Img</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -29,6 +30,8 @@
         </div>
     </div>
 </section>
+
+
 @endsection
 
 @section("script")
@@ -51,9 +54,18 @@
               { data: 'id_images' },
               { data: 'images' },
               { data: 'upload' },
+              { data: 'img' },
               { data: 'action' }
            ]
         });   
     });
+
+    function view_img(id){
+      
+    }
+
+    function download(id){
+
+    }
 </script>
 @endsection

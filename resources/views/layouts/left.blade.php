@@ -17,7 +17,7 @@
           <!-- User image -->
           <li class="user-header bg-primary">
             <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-            <p>Nama Agen</p>
+            <p>{{session('name')}}</p>
           </li>
           <li class="user-footer">
             <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -38,7 +38,7 @@
           <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nama User</a>
+          <a href="#" class="d-block">{{session('name')}}</a>
         </div>
       </div>
       <nav class="mt-2">

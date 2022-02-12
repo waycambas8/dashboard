@@ -65,8 +65,8 @@
 			});
 			$.ajax({
 				url: url,
-                processData: false,
-                contentType: false,
+        processData: false,
+        contentType: false,
 				data: formdata,
 				type: 'POST',
 				dataType: 'json',

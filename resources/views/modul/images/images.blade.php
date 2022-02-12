@@ -32,5 +32,28 @@
 @endsection
 
 @section("script")
-
+<script>
+    $("document").ready(function(){
+        if ($.fn.dataTable.isDataTable($("#image_table"))) {
+            $("#image_table").DataTable().destroy();
+        }
+      var dataTable = $("#image_table").DataTable({
+           processing: true,  
+           serverSide: true,
+           ajax:{
+              "url": "{{route('datatable')}}",
+              "type":"POST",
+              'headers': {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+              }
+           }, 
+           columns: [
+              { data: 'id_images' },
+              { data: 'images' },
+              { data: 'upload' },
+              { data: 'action' }
+           ]
+        });   
+    });
+</script>
 @endsection

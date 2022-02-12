@@ -104,4 +104,40 @@ class ApiController extends Controller
         }
         return $res;
     }
+
+    public function datatable(Request $req){
+        $req['url'] = "datatable";
+        $req['method'] = "POST";
+        $req['data'] = $req->toArray();
+        $res = $this->curl->with_guzzle($req);
+
+        $records = $res['records'];
+
+        //print_r($res);exit;
+        $data_arr = array();
+        foreach($records as $record){
+            $id = $record['id_images'];
+            $images = $record['nama_images'];
+            $upload = $record['images'];
+            $action = "tes";
+
+            $data_arr[] = array(
+                "id_images" => $id,
+                "images" => $images,
+                "upload" => $upload,
+                "action" => $action
+            );
+        }
+
+        $response = array(
+            "draw" => intval($res['draw']),
+            "iTotalRecords" => $res['totalRecords'],
+            "iTotalDisplayRecords" => $res['totalRecordswithFilter'],
+            "aaData" => $data_arr
+        );
+
+        echo json_encode($response);
+        exit; 
+    }
+    
 }

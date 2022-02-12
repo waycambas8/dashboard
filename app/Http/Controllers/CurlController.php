@@ -40,12 +40,14 @@ class CurlController extends Controller
         $url = $req['url'];
         $token_auth = (!empty(session("token_auth")))?session("token_auth"):"";
         $token_user = (!empty(session("token_user")))?session("token_user"):"";
+
         $response = Http::withHeaders([
             'Token-Header' => env("TOKEN_SERVER"),
             'Token-User' => $token_user
         ])
         ->withToken($token_auth)
         ->post(env("REQ_URL").$url, $req['data']);
+        
         return json_decode($response,true);
 
     }

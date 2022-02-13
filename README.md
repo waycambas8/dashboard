@@ -68,11 +68,6 @@ the execute never stop looping
 $ 
 ```
 
-## Finish Installation
-
-please check your database!
-
-
 ## Example Demo
 
 get the demo application here
